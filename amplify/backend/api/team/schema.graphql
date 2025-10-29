@@ -6,6 +6,7 @@ type requests
       { allow: owner, operations: [create, read] }
       { allow: owner, ownerField: "approver_ids", operations: [read] }
       { allow: private, provider: iam, operations: [read, update] }
+      { allow: groups, groupClaim: "scope", groups: ["api/admin"], operations: [create, read, update] }
     ]
   ) {
   id: ID!
