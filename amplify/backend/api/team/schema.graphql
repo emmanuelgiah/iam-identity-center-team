@@ -5,7 +5,7 @@ type requests
       { allow: groups, groups: ["Auditors"], operations: [read] }
       { allow: owner, operations: [create, read] }
       { allow: owner, ownerField: "approver_ids", operations: [read] }
-      { allow: private, provider: iam, operations: [read, update] }
+      { allow: private, provider: iam, operations: [create, read, update] }
       { allow: groups, groupClaim: "scope", groups: ["api/admin"], operations: [create, read, update] }
     ]
   ) {
@@ -22,6 +22,7 @@ type requests
       { allow: owner, operations: [read]}
       { allow: owner, ownerField: "approver_ids", operations: [read] }
       { allow: private, provider: iam, operations: [read, update] }
+      { allow: groups, groupClaim: "scope", groups: ["api/admin"], operations: [create, read, update] }
     ]
   )
   accountId: String!
@@ -38,6 +39,7 @@ type requests
       { allow: owner, operations: [create, read, update] }
       { allow: owner, ownerField: "approver_ids", operations: [update, read] }
       { allow: private, provider: iam, operations: [read, update] }
+      { allow: groups, groupClaim: "scope", groups: ["api/admin"], operations: [create, read, update] }
     ]
   )
   comment: String
