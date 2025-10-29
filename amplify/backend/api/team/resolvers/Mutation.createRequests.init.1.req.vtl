@@ -26,6 +26,11 @@ $util.qr($ctx.stash.defaultValues.put("status", "pending"))
 #if(!$ctx.args.input.username)
 $util.qr($ctx.args.input.put("username", $ctx.identity.username))
 #end
+
+## Set owner field for machine-to-machine tokens
+#if($ctx.identity && $ctx.identity.sub && !$ctx.args.input.owner)
+$util.qr($ctx.args.input.put("owner", $ctx.identity.sub))
+#end
 $util.toJson({
   "version": "2018-05-29",
   "payload": {}
