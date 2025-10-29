@@ -92,9 +92,11 @@ type requests
   @auth(
     rules: [
       { allow: groups, groups: ["Auditors"], operations: [read] }
+      { allow: groups, groups: ["Admin"], operations: [create, read, update, delete] }
       { allow: owner, operations: [read]}
       { allow: owner, ownerField: "approver_ids", operations: [read] }
       { allow: private, provider: iam, operations: [read, update] }
+      { allow: groups, groupClaim: "scope", groups: ["api/admin"], operations: [create, read, update] }
     ]
   )
   approver_ids: [String]
