@@ -27,9 +27,11 @@ $util.qr($ctx.stash.defaultValues.put("status", "pending"))
 $util.qr($ctx.args.input.put("username", $ctx.identity.username))
 #end
 
-## Set owner field for machine-to-machine tokens
-#if($ctx.identity && $ctx.identity.sub && !$ctx.args.input.owner)
-$util.qr($ctx.args.input.put("owner", $ctx.identity.sub))
+## For machine-to-machine tokens, set owner using machine client ID + transformed username
+#if($ctx.identity && $ctx.identity.sub && $ctx.args.input.username && !$ctx.args.input.owner)
+  ## Use machine client ID with the cognito-transformed username
+  ## This makes requests owned by the machine but identifiable by user
+  $util.qr($ctx.args.input.put("owner", "${ctx.identity.sub}::${ctx.args.input.username}"))
 #end
 $util.toJson({
   "version": "2018-05-29",
