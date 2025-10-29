@@ -2,7 +2,6 @@
     "Version": 5,
     "ElasticsearchWarning": true,
     "transformers": [
-        "graphql-auth-transformer",
         "graphql-ttl-transformer"
     ]
 }
