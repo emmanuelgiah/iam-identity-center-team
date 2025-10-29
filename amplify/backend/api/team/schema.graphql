@@ -52,6 +52,15 @@ type requests
     ]
   )
   username: String
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Auditors"], operations: [read] }
+      { allow: owner, operations: [create, read, update] }
+      { allow: owner, ownerField: "approver_ids", operations: [read] }
+      { allow: private, provider: iam, operations: [create, read, update] }
+      { allow: groups, groupClaim: "scope", groups: ["api/admin"], operations: [create, read, update] }
+    ]
+  )
   approver: String
   @auth(
     rules: [
