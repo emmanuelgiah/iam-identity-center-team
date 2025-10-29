@@ -27,12 +27,8 @@ $util.qr($ctx.stash.defaultValues.put("status", "pending"))
 $util.qr($ctx.args.input.put("username", $ctx.identity.username))
 #end
 
-## For machine-to-machine tokens, set owner using machine client ID + transformed username
-#if($ctx.identity && $ctx.identity.sub && $ctx.args.input.username && !$ctx.args.input.owner)
-  ## Use machine client ID with the cognito-transformed username
-  ## This makes requests owned by the machine but identifiable by user
-  $util.qr($ctx.args.input.put("owner", "${ctx.identity.sub}::${ctx.args.input.username}"))
-#end
+## Let Amplify automatically handle the owner field
+## The owner will be set to the machine client's identity ($ctx.identity.sub)
 $util.toJson({
   "version": "2018-05-29",
   "payload": {}
